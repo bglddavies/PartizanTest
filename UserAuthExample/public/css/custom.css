@@ -1,0 +1,13 @@
+.sidebar-toggle:hover, .sidebar-toggle:focus{
+    text-decoration:none;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header{
+    height:75px;
+}
+
+.control-sidebar-container{
+    padding:5px 10px;
+    max-height:1000px;
+    overflow-y:scroll;
+}

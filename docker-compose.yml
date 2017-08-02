@@ -1,0 +1,37 @@
+version: '2'
+services:
+    web:
+        build:
+            context: ./
+            dockerfile: web.docker
+        volumes:
+            - ./UserAuthExample:/var/www
+        ports:
+            - "8080:80"
+        links:
+            - app
+    app:
+        build:
+            context: ./
+            dockerfile: app.docker
+        volumes:
+            - ./UserAuthExample:/var/www
+        links:
+            - database
+            - cache
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=database"
+    database:
+        image: mysql:5.7
+        environment:
+            - "MYSQL_ROOT_PASSWORD=default"
+            - "MYSQL_DATABASE=default"
+        ports:
+            - "33061:3306"
+    cache:
+        image: redis:3.2
+        ports:
+            - "6379:6379"
+        command: >
+            --requirepass secret 
